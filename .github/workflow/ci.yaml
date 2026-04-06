@@ -15,8 +15,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show files
-        run: ls -R
+      - name: Show OS
+        run: echo "Running on ${{ matrix.os }}"
 
-      - name: Check Python
+      - name: Show Python Version
         run: python --version
+
+      - name: Show Current Directory
+        run: pwd
+
+      - name: Show Files
+        run: ls
