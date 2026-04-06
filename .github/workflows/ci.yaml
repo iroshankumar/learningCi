@@ -1,19 +1,31 @@
-name: Basic CI
+name: CI
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
+  linting:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        version: ["3.8", "3.9", "3.10"]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show files
-        run: ls -R
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.version }}
 
-      - name: Check Python
-        run: python --version
+      - name: Install flake8
+        run: |
+          pip install flake8
+          python --version
+
+      - name: Run flake8
+        run: flake8 .
