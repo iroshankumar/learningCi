@@ -5,9 +5,13 @@ def sum(a, b):
 def sub(a, b):
     return a - b
 
+def multiply(a, b):
+    return a * b
+
 
 result1 = sum(5, 3)
 result2 = sub(5, 3)
+result3 = multiply(5, 3)
 
 print("Sum:", result1)
 print("Subtraction:", result2)
