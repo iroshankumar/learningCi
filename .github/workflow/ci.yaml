@@ -1,28 +1,33 @@
-name: Basic CI
+name: CI
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  check:
+  linting:
     runs-on: ${{ matrix.os }}
+    
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        version: [3.8, 3.9, 3.10]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Show OS
-        run: echo "Running on ${{ matrix.os }}"
+      - name: setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.version }}
 
-      - name: Show Python Version
-        run: python --version
 
-      - name: Show Current Directory
-        run: pwd
 
-      - name: Show Files
-        run: ls
+      - name: install flske8
+        run: 
+          pip install flake8 
+          python --version
+
+      - name: run flake8
+        run: flake8 sum.py
