@@ -1,8 +1,10 @@
 def sum(a, b):
     return a + b
 
+
 def sub(a, b):
     return a - b
+
 
 result1 = sum(5, 3)
 result2 = sub(5, 3)
